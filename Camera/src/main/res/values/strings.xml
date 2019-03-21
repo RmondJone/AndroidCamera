@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Camera</string>
+    <!--权限申请-->
+    <string name="permission_camra">相机权限被禁用，请前往权限管理设置相机权限</string>
+    <string name="permission_audio">录音权限被禁用，请前往权限管理设置录音权限</string>
+    <string name="permission_storage">文件读取权限被禁用，请前往权限管理设置文件读取权限</string>
+    <string name="permission_camra_storage">文件读取权限或相机权限被禁用，请前往权限管理设置文件读取或相机权限</string>
+    <string name="permission_audio_storage">文件读取权限或录音权限被禁用，请前往权限管理设置文件读取或录音权限</string>
+</resources>

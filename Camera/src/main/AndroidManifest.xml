@@ -1,0 +1,34 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.rmondjone.camera">
+    <!-- 增加文件存储和访问摄像头的权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- 闪光灯权限 -->
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <uses-feature android:name="android.hardware.camera" />
+
+    <application
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+        <activity android:name=".CameraActivity" />
+    </application>
+
+    <!--region 适配全面屏-->
+    <meta-data
+        android:name="android.max_aspect"
+        android:value="2.4" />
+    <!--endregion-->
+
+    <!--刘海屏适配-->
+    <!--由于目前市面上刘海屏各家一套，没有按照Android P官方进行适配，所以暂时不做刘海屏适配处理。
+    大部分厂家都已经对没有适配刘海屏的应用有自己的一套处理逻辑，我们的应用基本可以在大部分刘海屏手机上正常显示！-->
+    <!--华为刘海区域展示-->
+    <meta-data
+        android:name="android.notch_support"
+        android:value="true" />
+    <!--小米刘海区域展示-->
+    <meta-data
+        android:name="notch.config"
+        android:value="portrait" />
+</manifest>

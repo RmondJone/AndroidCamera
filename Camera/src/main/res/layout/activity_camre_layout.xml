@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--相机预览视图-->
+    <FrameLayout
+        android:id="@+id/camera_preview_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
+    <!--蒙版区域-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+        <!--提示文字-->
+        <RelativeLayout
+            android:id="@+id/camera_tip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/tip_layout_shape"
+                android:gravity="center"
+                android:text="请参照辅助线进行拍摄"
+                android:textColor="#fff"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <!--蒙版图片-->
+        <ImageView
+            android:id="@+id/mask_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="20dp"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/hk_macao_taiwan_passes_positive"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/passport_entry_and_exit_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="54dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="54dp"
+            android:layout_marginBottom="50dp"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/passport_entry_and_exit"
+            android:visibility="gone" />
+
+
+    </LinearLayout>
+    <!--顶部视图-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:padding="15dp">
+
+        <ImageView
+            android:id="@+id/flash_button"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@mipmap/flash_close" />
+    </LinearLayout>
+
+    <!--拍照完成确定视图-->
+    <RelativeLayout
+        android:id="@+id/ll_confirm_layout"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:padding="50dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/cancle_save_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/failed" />
+
+        <ImageView
+            android:id="@+id/save_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/success" />
+    </RelativeLayout>
+
+    <!--底部拍照按钮-->
+    <RelativeLayout
+        android:id="@+id/ll_photo_layout"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:padding="15dp"
+        android:visibility="visible">
+
+        <Button
+            android:id="@+id/cancle_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:text="取消"
+            android:textColor="#fff"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/take_photo_button"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/take_button" />
+    </RelativeLayout>
+
+
+</RelativeLayout>
