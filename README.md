@@ -6,6 +6,5 @@
 ![Venn Diagram 11.png](https://user-gold-cdn.xitu.io/2019/3/13/1697534bb2087301?w=1123&h=794&f=png&s=59022)
 
 ### Demo 预览
-![Screenshot_2019-03-13-10-57-07-128_com.focustech..png](https://user-gold-cdn.xitu.io/2019/3/13/1697507ecff2ddc4?w=500&h=1000&f=png&s=699364)
 
 ![Screenshot_2019-03-13-10-57-23-754_com.focustech..png](https://user-gold-cdn.xitu.io/2019/3/13/1697507ed0a25dca?w=500&h=1000&f=png&s=819922)
