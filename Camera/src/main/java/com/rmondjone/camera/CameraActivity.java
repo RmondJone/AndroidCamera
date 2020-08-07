@@ -3,6 +3,8 @@ package com.rmondjone.camera;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.hardware.Camera;
 import android.os.Build;
@@ -419,6 +421,9 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
             if (fos != null) {
                 try {
                     fos.close();
+                    Bitmap retBitmap = BitmapFactory.decodeFile(imagePath);
+                    retBitmap = BitmapUtils.setTakePicktrueOrientation(Camera.CameraInfo.CAMERA_FACING_BACK, retBitmap);
+                    BitmapUtils.saveBitmap(retBitmap, imagePath);
                     Intent intent = new Intent();
                     intent.putExtra(KEY_IMAGE_PATH, imagePath);
                     setResult(RESULT_OK, intent);
