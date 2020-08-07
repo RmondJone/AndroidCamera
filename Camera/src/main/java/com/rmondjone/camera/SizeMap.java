@@ -55,7 +55,19 @@ public class SizeMap {
     }
 
     SortedSet<Size> sizes(AspectRatio ratio) {
-        return mRatios.get(ratio);
+        if (mRatios.get(ratio) != null) {
+            return mRatios.get(ratio);
+        }
+        //如果找不到合适屏宽比，找最接近屏幕的
+        AspectRatio retRatio = ratio;
+        float diff = 1;
+        for (AspectRatio size : ratios()) {
+            if (Math.abs(ratio.toFloat() - size.toFloat()) < diff) {
+                retRatio = size;
+                diff = Math.abs(ratio.toFloat() - size.toFloat());
+            }
+        }
+        return mRatios.get(retRatio);
     }
 
     void clear() {

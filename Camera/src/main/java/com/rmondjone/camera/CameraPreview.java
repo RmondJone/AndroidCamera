@@ -135,7 +135,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     private AspectRatio getDeviceAspectRatio(Activity activity) {
         int width = activity.getWindow().getDecorView().getWidth();
         int height = activity.getWindow().getDecorView().getHeight();
-        return AspectRatio.of(width, height);
+        return AspectRatio.of(Math.min(width, height), Math.max(width, height));
     }
 
     /**
@@ -160,7 +160,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
             desiredHeight = surfaceHeight;
         }
         Size result = new Size(desiredWidth, desiredHeight);
-        if (!sizes.isEmpty()) {
+        if (sizes != null && !sizes.isEmpty()) {
             for (Size size : sizes) {
                 if (desiredWidth <= size.getWidth() && desiredHeight <= size.getHeight()) {
                     return size;
