@@ -16,9 +16,6 @@
 
 package com.rmondjone.camera;
 
-import android.support.annotation.NonNull;
-
-
 /**
  * 注释：尺寸对象
  * 时间：2019/3/4 0004 11:14
@@ -75,7 +72,7 @@ public class Size implements Comparable<Size> {
     }
 
     @Override
-    public int compareTo(@NonNull Size another) {
+    public int compareTo(Size another) {
         return mWidth * mHeight - another.mWidth * another.mHeight;
     }
 

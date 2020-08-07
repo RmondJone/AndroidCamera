@@ -2,8 +2,8 @@ package com.rmondjone.camera;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
-import android.support.v4.util.SparseArrayCompat;
+
+import androidx.collection.SparseArrayCompat;
 
 /**
  * @author 郭翰林
@@ -118,7 +118,7 @@ public class AspectRatio implements Comparable<AspectRatio>, Parcelable {
     }
 
     @Override
-    public int compareTo(@NonNull AspectRatio another) {
+    public int compareTo(AspectRatio another) {
         if (equals(another)) {
             return 0;
         } else if (toFloat() - another.toFloat() > 0) {

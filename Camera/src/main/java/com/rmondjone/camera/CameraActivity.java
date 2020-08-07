@@ -9,8 +9,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +16,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.newland.springdialog.AnimSpring;
@@ -121,25 +122,19 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_camre_layout);
         fitComprehensiveScreen();
         mMongolianLayerType = (MongolianLayerType) getIntent().getSerializableExtra("MongolianLayerType");
-        PermissionUtils.applicationPermissions(this, new PermissionUtils.PermissionListener() {
-            @Override
-            public void onSuccess(Context context) {
-                initView();
-                setOnclickListener();
-            }
-
-            @Override
-            public void onFailed(Context context) {
-                if (AndPermission.hasAlwaysDeniedPermission(context, Permission.Group.CAMERA)
-                        && AndPermission.hasAlwaysDeniedPermission(context, Permission.Group.STORAGE)) {
-                    AndPermission.with(context).runtime().setting().start();
-                }
-                Toast.makeText(context, context.getString(R.string.permission_camra_storage), Toast.LENGTH_SHORT);
-                finish();
-            }
-        }, Permission.Group.STORAGE, Permission.Group.CAMERA);
+        initView();
+        setOnclickListener();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mCamera = Camera.open();
+        CameraPreview preview = new CameraPreview(this, mCamera);
+        mOverCameraView = new OverCameraView(this);
+        mPreviewLayout.addView(preview);
+        mPreviewLayout.addView(mOverCameraView);
+    }
 
     /**
      * 作者：郭翰林
@@ -165,9 +160,23 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
      * @param type
      */
     public static void startMe(Activity activity, int requestCode, MongolianLayerType type) {
-        Intent intent = new Intent(activity, CameraActivity.class);
-        intent.putExtra("MongolianLayerType", type);
-        activity.startActivityForResult(intent, requestCode);
+        PermissionUtils.applicationPermissions(activity, new PermissionUtils.PermissionListener() {
+            @Override
+            public void onSuccess(Context context) {
+                Intent intent = new Intent(activity, CameraActivity.class);
+                intent.putExtra("MongolianLayerType", type);
+                activity.startActivityForResult(intent, requestCode);
+            }
+
+            @Override
+            public void onFailed(Context context) {
+                if (AndPermission.hasAlwaysDeniedPermission(context, Permission.Group.CAMERA)
+                        && AndPermission.hasAlwaysDeniedPermission(context, Permission.Group.STORAGE)) {
+                    AndPermission.with(context).runtime().setting().start();
+                }
+                Toast.makeText(context, context.getString(R.string.permission_camra_storage), Toast.LENGTH_SHORT);
+            }
+        }, Permission.Group.STORAGE, Permission.Group.CAMERA);
     }
 
     /**
@@ -298,16 +307,6 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         isTakePhoto = false;
     }
 
-    /**
-     * 解析拍出照片的路径
-     *
-     * @param data
-     * @return
-     */
-    public static String parseResult(Intent data) {
-        return data.getStringExtra(KEY_IMAGE_PATH);
-    }
-
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -380,12 +379,6 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         mMaskImage = findViewById(R.id.mask_img);
         rlCameraTip = findViewById(R.id.camera_tip);
         mPassportEntryAndExitImage = findViewById(R.id.passport_entry_and_exit_img);
-
-        mCamera = Camera.open();
-        CameraPreview preview = new CameraPreview(this, mCamera);
-        mOverCameraView = new OverCameraView(this);
-        mPreviewLayout.addView(preview);
-        mPreviewLayout.addView(mOverCameraView);
         if (mMongolianLayerType == null) {
             mMaskImage.setVisibility(View.GONE);
             rlCameraTip.setVisibility(View.GONE);
