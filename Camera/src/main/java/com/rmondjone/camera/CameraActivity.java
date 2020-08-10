@@ -131,7 +131,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onResume() {
         super.onResume();
-        mCamera = Camera.open();
+        mCamera = Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK);
         CameraPreview preview = new CameraPreview(this, mCamera);
         mOverCameraView = new OverCameraView(this);
         mPreviewLayout.addView(preview);

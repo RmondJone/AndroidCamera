@@ -20,6 +20,7 @@
         android:supportsRtl="true">
         <activity
             android:name=".CameraActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:hardwareAccelerated="true" />
         <provider
             android:authorities="${applicationId}"

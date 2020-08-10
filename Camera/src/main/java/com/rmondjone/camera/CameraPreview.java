@@ -84,8 +84,8 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
             Size previewSize = chooseOptimalSize(mPreviewSizes.sizes(mAspectRatio));
             Size pictureSize = mPictureSizes.sizes(mAspectRatio).last();
             //设置相机参数
-            parameters.setPreviewSize(previewSize.getWidth(), previewSize.getHeight());
-            parameters.setPictureSize(pictureSize.getWidth(), pictureSize.getHeight());
+            parameters.setPreviewSize(Math.max(previewSize.getWidth(), previewSize.getHeight()), Math.min(previewSize.getWidth(), previewSize.getHeight()));
+            parameters.setPictureSize(Math.max(pictureSize.getWidth(), pictureSize.getHeight()), Math.min(pictureSize.getWidth(), pictureSize.getHeight()));
             parameters.setPictureFormat(ImageFormat.JPEG);
             parameters.setRotation(getDisplayOrientation());
             mCamera.setParameters(parameters);
@@ -192,24 +192,24 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     private int getDisplayOrientation() {
         Camera.CameraInfo info = new Camera.CameraInfo();
         Camera.getCameraInfo(Camera.CameraInfo.CAMERA_FACING_BACK, info);
-        int rotation = mDisplayOrientation;
+        int orientation;
         int degrees = 0;
-        if (rotation == Surface.ROTATION_0) {
+        if (mDisplayOrientation == Surface.ROTATION_0) {
             degrees = 0;
-        } else if (rotation == Surface.ROTATION_90) {
+        } else if (mDisplayOrientation == Surface.ROTATION_90) {
             degrees = 90;
-        } else if (rotation == Surface.ROTATION_180) {
+        } else if (mDisplayOrientation == Surface.ROTATION_180) {
             degrees = 180;
-        } else if (rotation == Surface.ROTATION_270) {
+        } else if (mDisplayOrientation == Surface.ROTATION_270) {
             degrees = 270;
         }
+        orientation = (degrees + 45) / 90 * 90;
         int result;
         if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
-            result = (info.orientation + degrees) % 360;
-            result = (360 - result) % 360;
+            result = (info.orientation - orientation + 360) % 360;
         } else {
             // back-facing
-            result = (info.orientation - degrees + 360) % 360;
+            result = (info.orientation + orientation) % 360;
         }
         return result;
     }
