@@ -26,6 +26,10 @@ public class BitmapUtils {
      * @return
      */
     public static Bitmap setTakePicktrueOrientation(int id, Bitmap bitmap) {
+        //如果返回的图片宽度小于高度，说明FrameWork层已经做过处理直接返回即可
+        if (bitmap.getWidth() < bitmap.getHeight()) {
+            return bitmap;
+        }
         Camera.CameraInfo info = new Camera.CameraInfo();
         Camera.getCameraInfo(id, info);
         bitmap = rotaingImageView(id, info.orientation, bitmap);
