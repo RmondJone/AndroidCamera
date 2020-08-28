@@ -8,3 +8,7 @@
 ### Demo 预览
 
 ![Screenshot_2019-03-13-10-57-23-754_com.focustech..png](https://user-gold-cdn.xitu.io/2019/3/13/1697507ed0a25dca?w=500&h=1000&f=png&s=819922)
+
+### 欢迎加入我的QQ群
+
+#### QQ号：264587303
