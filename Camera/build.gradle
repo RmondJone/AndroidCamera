@@ -31,9 +31,11 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
-    //弹框视图
-    api 'com.github.RmondJone:SpringDiaLog:1.0.6'
+    //Facebook Spring动画库
+    api 'com.facebook.rebound:rebound:0.3.8'
+    //glide图片加载库
     api 'com.github.bumptech.glide:glide:3.7.0'
     //权限申请
     api 'com.yanzhenjie:permission:2.0.0-rc11'
+    api 'androidx.appcompat:appcompat:1.2.0'
 }
